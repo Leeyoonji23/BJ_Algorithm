@@ -1,0 +1,63 @@
+//팰린드롬? 이 뭔지 몰라서 찾아봄..
+//순서를 거꾸로 읽었을 때도 문자열이나 수열이 동일한 경우
+//즉 앞 뒤가 똑같은 대리운전 이 아니라 abba 같이 앞에서 읽을때랑 뒤에서 읽을때랑 모양이 같아야 함.
+
+//임문빈이 임한수의 영어 이름으로 팰린드롬을 만들려고 함.
+//임한수의 영어 이름을 팰린드롬으로 바꾸는 프로그램. - 임한수의 영어 이름의 알파벳순서를 적절히 바꿔서.
+//입력은 알파벳 대문자로만, 최대 50자
+//만약 불가능일 때는 "I'm Sorry Hansoo" 출력
+
+//문제 접근
+//ABBA, ABCBA, ABCCBA 는 팰린드롬
+//AAABBBC->  ABACBAB 는 팰린드롬 안됨.
+//-> 홀수 번 나오는 문자가 하나여야 함. 즉, 두 개 이상이면 안됨. or 모두 짝수이거나.
+
+
+const input = require("fs").readFileSync('./week1/run/input.txt').toString().trim().split("\n");
+
+function solution(name) {
+    let stack_1 = [];
+    let stack_2 = [];
+    let now_idx = 0;
+    let center = "";
+    let isValid = false;
+    let length = name.length;
+
+    while (now_idx < length) {
+        if (!isValid) {
+            stack_1.push(name[now_idx]);
+            isValid = true;
+        } else {
+            if (stack_1[stack_1.length - 1] !== name[now_idx]) {
+                if (center === "") {
+                    center = stack_1.pop();
+                    stack_1.push(name[now_idx]);
+                } else {
+                    return "I'm Sorry Hansoo";
+                }
+            } else {
+                stack_2.push(name[now_idx]);
+                isValid = false;
+            }
+        }
+        now_idx += 1;
+    }
+
+    if (center !== "") {
+        if (isValid) {
+            return "I'm Sorry Hansoo";
+        } else {
+            stack_1.push(center);
+        }
+    }
+
+    while (stack_2.length > 0) {
+        stack_1.push(stack_2.pop());
+    }
+
+    return stack_1.join("");
+}
+
+// 파일로부터 입력 처리
+let name = input[0].split("").sort();
+console.log(solution(name));
