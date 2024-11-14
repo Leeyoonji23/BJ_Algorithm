@@ -1,3 +1,12 @@
+//bfs
+//1. 치즈 녹이기 
+//visited를 통해 이미 방문한 곳인지 확인
+//녹이는 치즈를 0으로 바꾸고 그 치즈는 bfs 에 넣으면 안됨.
+//2. 남은 치즈의 개수 세기
+//-> filter, reduce 를 사용해서 1의 개수 세기
+//3. 시간을 1시간으로 늘리기
+//4. 남은 치즈의 개수가 0이면 종료
+
 const fs = require('fs');
 const input = fs.readFileSync("./week3/run/input.txt").toString().trim().split('\n');
 
@@ -47,6 +56,8 @@ input.forEach(line => map.push(line.split(' ').map(Number)));
 let cheezeCnt = cheezeCount(map);
 let time = 0;
 let cheeze = 0;
+
+//cheezCnt가 0이 될 때까지 치즈 녹이는 작업 반복
 
 while(cheezeCnt > 0) {
     cheeze = checkMeltCheeze(map); // 현재 단계에서 녹는 치즈 개수
