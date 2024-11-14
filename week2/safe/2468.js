@@ -5,7 +5,7 @@
 //물의 양 조절
 //물에 잠기는 영역 확인
 //안전한 영역의 개수 체크
-//반복문, 배열, BFS? DFS
+//반복문, 배열, BFS? 
 
 const fs = require("fs");
 const input = fs.readFileSync("./week2/run/input.txt").toString().trim().split('\n');

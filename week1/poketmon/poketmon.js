@@ -12,10 +12,12 @@
 // 숫자만 -> 포켓몬 번호에 해당하는 문자 출력
 
 const fs = require('fs');
-
-// 첫째 줄
 const input = fs.readFileSync('./week1/run/input.txt', 'utf8').trim().split('\n').map(line => line.trim());
+
+//첫째 줄
 const [N, M] = input.shift().split(' ').map(num => parseInt(num));
+
+
 // 둘째 줄
 const orders = input.slice(0, N);
 const questions = input.slice(N, N + M);
@@ -29,3 +31,5 @@ const map = new Map(mon_first.concat(num_first));
 questions.forEach(elem => {
     console.log(map.get(elem) || '존재하지 않는 포켓몬입니다');
 });
+
+//const input = fs.readFileSync('/dev/stdin').trim().split('\n').map(line => line.trim());

@@ -20,7 +20,7 @@ function dfs(x, y, array, M, N) {
     if (x < 0 || y < 0 || x >= M || y >= N) return false; // 좌표 유효성 검사
     if (array[x][y] === 1) { // 배추가 심어져 있으면
         array[x][y] = 0; // 방문 표시 (0으로 변경)
-
+0
         // 상하좌우로 재귀 호출하여 연결된 배추 탐색
         dfs(x - 1, y, array, M, N);
         dfs(x + 1, y, array, M, N);
@@ -60,5 +60,4 @@ function solve(input) {
     results.forEach(result => console.log(result));
 }
 
-// 입력 예제 처리
 solve(input);

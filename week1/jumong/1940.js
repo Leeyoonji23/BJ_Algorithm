@@ -12,6 +12,8 @@
 
 
 const input = require("fs").readFileSync('./week1/run/input.txt').toString().trim().split("\n");
+
+
 // 입력 처리
 const N = Number(input[0]);
 const M = Number(input[1]);
