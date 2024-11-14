@@ -5,7 +5,6 @@
 //가능한 정답이 여러가지인 경우에는 아무거나 출력(?)
 
 
-
 const input = require("fs").readFileSync('./week1/run/input.txt').toString().trim().split("\n");
 
 // 길이가 9인 배열 생성 -> 난쟁이가 9명이니까
