@@ -1,3 +1,7 @@
+//입력된 수 N번째로 나오는 "666"이 포함된 숫자를 찾음.
+//num을 1씩 늘려가면서 num내에 연속된 666이 존재할 때마다 카운트를 증가시켜 목표한 카운트(n)에 도달할 때까지 반복하기
+
+
 const fs = require("fs");
  
 const input = fs.readFileSync("./week3/run/input.txt").toString().trim().split("\n");
