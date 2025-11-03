@@ -1,19 +1,28 @@
-const fs = require('fs');
-const input = fs.readFileSync('/dev/stdin', 'utf8').trim().split('\n').map(line => line.trim());
+//나는야 포켓몬 마스터 이다솜
+const fs = require("fs");
+const input = fs.readFileSync("/dev/stdin", "utf-8").trim().split("\n");
 
-// 첫째 줄
-const [N, M] = input.shift().split(' ').map(num => parseInt(num));
+const [N, M] = input[0].split(" ").map(Number);
+const pokemon = input.slice(1, N + 1);
+const questions = input.slice(N + 1);
 
-// 둘째 줄
-const orders = input.slice(0, N);
-const questions = input.slice(N, N + M);
+// 이름 -> 번호 매핑 (O(1) 조회)
+const nameToIndex = new Map();
+for (let i = 0; i < N; i++) {
+  nameToIndex.set(pokemon[i], i + 1);
+}
 
-// 포켓몬 이름과 번호를 맵으로 저장
-const mon_first = orders.map((elem, idx) => [elem, (idx + 1).toString()]);
-const num_first = orders.map((elem, idx) => [(idx + 1).toString(), elem]);
-const map = new Map(mon_first.concat(num_first));
+// 출력 버퍼에 모아서 한 번에 출력 (I/O 성능 향상)
+const outputs = [];
+for (let i = 0; i < M; i++) {
+  const q = questions[i];
+  // 숫자 여부 판단: 전부 숫자인지 정규식으로 확인
+  if (/^\d+$/.test(q)) {
+    const idx = parseInt(q, 10);
+    outputs.push(pokemon[idx - 1]);
+  } else {
+    outputs.push(String(nameToIndex.get(q)));
+  }
+}
 
-// 문제에 대한 답 출력
-questions.forEach(elem => {
-    console.log(map.get(elem) || '존재하지 않는 포켓몬입니다');
-});
+console.log(outputs.join("\n"));
