@@ -1,25 +1,26 @@
-const fs = require("fs");
-const input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
+// 교수 가 된 현우
 
-//주어진 팩토리얼에서 2의 개수, 5의 개수 중 최솟값 찾기
-const T = parseInt(input[0]);
-let result = [];
+const input = require("fs")
+  .readFileSync("/dev/stdin")
+  .toString()
+  .trim()
+  .split("\n");
 
-for (let i = 1; i <= T; i++) {
-    const N = parseInt(input[i]);
-
-    let twoCnt = 0;
-    let fiveCnt = 0;
-
-    for (let j = 2; j <= N; j *= 2) {
-        twoCnt += Math.floor(N / j);
-    }
-
-    for (let j = 5; j <= N; j *= 5) {
-        fiveCnt += Math.floor(N / j);
-    }
-
-    result.push(Math.min(twoCnt, fiveCnt));
+function getFiveCount(n) {
+  let five = 0;
+  for (let i = 5; i <= n; i *= 5) {
+    five += Math.trunc(n / i);
+  }
+  return five;
 }
 
-console.log(result.join('\n'));
+const T = Number(input[0]); // 테스트 케이스 개수
+const answers = [];
+
+for (let i = 1; i <= T; i++) {
+  const num = Number(input[i]); // n!
+  const fiveCount = getFiveCount(num);
+  answers.push(fiveCount);
+}
+
+console.log(answers.join("\n"));
