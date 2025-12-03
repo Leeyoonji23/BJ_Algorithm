@@ -1,18 +1,20 @@
+// 영화감독 숌
+
 const fs = require("fs");
- 
-const input = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
- 
-const N = parseInt(input);
- 
-let count = 0; // 종말의 수 개수
-let num = 0; // 현재 검사 중인 수
- 
-// N보다 작을 때 까지 종말의 수 찾기
-// num을 1씩 증가시키면서 num을 문자열로 변환했을 때 '666'이 포함되어있다면 count 증가시키기
-while (count < N) {
-  num++;
+
+const input = fs.readFileSync("/dev/stdin").toString().trim();
+const N = Number(input);
+
+let count = 0;
+let num = 666;
+
+while (true) {
   if (String(num).includes("666")) {
     count++;
+    if (count === N) {
+      console.log(num);
+      break;
+    }
   }
+  num++;
 }
-console.log(num);
